@@ -1,0 +1,37 @@
+[{
+    "Item": {
+        "id": {
+            "S": "13544171"
+        },
+        "email": {
+            "S": "jmantillap@gmail.com"
+        },
+        "nombre": {
+            "S": "Javier Mantilla"
+        },
+        "saldo": {
+            "N": "500000"
+        }
+    }
+},
+{
+    "Item": {
+        "id": {
+            "S": "37896334"
+        },
+        "email": {
+            "S": "eliana.bravovesga@gmail.com"
+        },
+        "nombre": {
+            "S": "Eliana Bravo"
+        },
+        "saldo": {
+            "N": "500000"
+        }
+    }
+}
+]
+
+
+
+

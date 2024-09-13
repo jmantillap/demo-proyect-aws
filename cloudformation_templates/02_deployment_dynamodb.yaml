@@ -1,0 +1,108 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: CloudFormation template para creacion de tablas y importancion de datos
+Parameters:
+  BucketName: { Type: String, Default: "test-files-1978" }
+Resources:
+  DDBTableCliente:
+    DeletionPolicy: Delete
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: CLIENTES
+      BillingMode: PROVISIONED
+      AttributeDefinitions:
+        -
+          AttributeName: "id"
+          AttributeType: "S"
+        -
+          AttributeName: "email"
+          AttributeType: "S"       
+      KeySchema:
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+        -
+          AttributeName: "email"
+          KeyType: "RANGE"        
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1   
+      SSESpecification:
+        SSEEnabled: False
+      ImportSourceSpecification:
+        InputCompressionType: "NONE"
+        InputFormat: "CSV"
+        S3BucketSource:
+          S3Bucket: !Ref BucketName
+          S3KeyPrefix: "data_clientes.csv"
+  DDBTableFondo:
+    DeletionPolicy: Delete
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: FONDOS
+      BillingMode: PROVISIONED
+      AttributeDefinitions:
+        -
+          AttributeName: "id"
+          AttributeType: "S"
+        -
+          AttributeName: "codigo"
+          AttributeType: "S"       
+      KeySchema:
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+        -
+          AttributeName: "codigo"
+          KeyType: "RANGE"        
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1   
+      SSESpecification:
+        SSEEnabled: False
+      ImportSourceSpecification:
+        InputCompressionType: "NONE"
+        InputFormat: "CSV"
+        S3BucketSource:
+          S3Bucket: !Ref BucketName
+          S3KeyPrefix: "data_fondos.csv"
+  DDBTransaccion:
+    DeletionPolicy: Delete
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: TRANSACCIONES
+      BillingMode: PROVISIONED
+      AttributeDefinitions:
+        -
+          AttributeName: "id"
+          AttributeType: "S"
+        -
+          AttributeName: "cliente"
+          AttributeType: "S"       
+      KeySchema:
+        -
+          AttributeName: "id"
+          KeyType: "HASH"
+        -
+          AttributeName: "cliente"
+          KeyType: "RANGE"        
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1   
+      SSESpecification:
+        SSEEnabled: False
+      #ImportSourceSpecification:
+      #  InputCompressionType: "NONE"
+      #  InputFormat: "CSV"
+      #  S3BucketSource:
+      #    S3Bucket: !Ref BucketName
+      #    S3KeyPrefix: "data_fondos.csv"            
+Outputs:
+  DDBTableCliente:
+    Description: tabla de clientes creada para este template
+    Value: !Ref DDBTableCliente
+  DDBTableFondo:
+    Description: tabla de fondos creada para este template
+    Value: !Ref DDBTableFondo
+  DDBTransaccion:
+    Description: tabla de transacciones creada para este template
+    Value: !Ref DDBTransaccion

@@ -1,0 +1,97 @@
+[{
+    "Item": {
+        "id": {
+            "S": "1"
+        },
+        "codigo": {
+            "S": "FPV_BTG_PACTUAL_RECAUDADORA"
+        },
+        "nombre": {
+            "S": "BTG PACTUAL RECAUDADORA"
+        },
+        "monto": {
+            "N": "75000"
+        },
+        "categoria": {
+            "S": "FPV"
+        }
+    }
+},
+{
+    "Item": {
+        "id": {
+            "S": "2"
+        },
+        "codigo": {
+            "S": "FPV_BTG_PACTUAL_ECOPETROL"
+        },
+        "nombre": {
+            "S": "BTG PACTUAL ECOPETROL"
+        },
+        "monto": {
+            "N": "125000"
+        },
+        "categoria": {
+            "S": "FPV"
+        }
+    }
+},
+{
+    "Item": {
+        "id": {
+            "S": "3"
+        },
+        "codigo": {
+            "S": "DEUDAPRIVADA"
+        },
+        "nombre": {
+            "S": "DEUDA PRIVADA"
+        },
+        "monto": {
+            "N": "50000"
+        },
+        "categoria": {
+            "S": "FIC"
+        }
+    }
+},
+{
+    "Item": {
+        "id": {
+            "S": "4"
+        },
+        "codigo": {
+            "S": "FDO-ACCIONES"
+        },
+        "nombre": {
+            "S": "FONDO ACCIONES"
+        },
+        "monto": {
+            "N": "250000"
+        },
+        "categoria": {
+            "S": "FIC"
+        }
+    }
+},
+{
+    "Item": {
+        "id": {
+            "S": "5"
+        },
+        "codigo": {
+            "S": "FPV_BTG_PACTUAL_DINAMICA"
+        },
+        "nombre": {
+            "S": "BTG PACTUAL DINAMICA"
+        },
+        "monto": {
+            "N": "100000"
+        },
+        "categoria": {
+            "S": "FIV"
+        }
+    }
+}
+]
+

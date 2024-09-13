@@ -1,0 +1,29 @@
+[{
+    "id": {
+      "S": "13544171"
+    },
+    "email": {
+      "S": "jmantillap@gmail.com"
+    },
+    "nombre": {
+      "S": "Javier Mantilla"
+    },
+    "saldo": {
+      "N": "500000"
+    }
+  },
+  {
+    "id": {
+      "S": "37896334"
+    },
+    "email": {
+      "S": "jmantillap@gmail.com"
+    },
+    "nombre": {
+      "S": "Javier Mantilla"
+    },
+    "saldo": {
+      "N": "500000"
+    }
+  }
+]
