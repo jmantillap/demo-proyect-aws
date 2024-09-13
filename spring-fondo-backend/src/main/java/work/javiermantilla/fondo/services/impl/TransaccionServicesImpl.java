@@ -56,6 +56,7 @@ public class TransaccionServicesImpl implements TransaccionServices {
 		final String uuid = UUID.randomUUID().toString();
 	    newTransaccionEntity.setId(uuid);
 	    newTransaccionEntity.setFecha(new Date().toString());
+	    this.transaccionDAO.saveOrUpdate(newTransaccionEntity);
 	    return true;	    
 	}
 

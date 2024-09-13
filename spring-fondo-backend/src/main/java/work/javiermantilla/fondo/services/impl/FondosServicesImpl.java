@@ -51,6 +51,16 @@ public class FondosServicesImpl implements FondosServices {
 
 		List<FondoEntity> listActivos = listFondos.stream().filter(f -> fondosActivosCliente.contains(f.getId()))
 				.toList();
+		
+		listActivos.forEach(f->{
+			Optional<Float> monto = listTransacciones.stream()
+					.filter(t->t.getFondo().equals(f.getId()))
+					.map(TransaccionEntity::getValor)
+					.findAny();
+			f.setMonto(monto.get().toString());
+		});
+		
+		
 
 		return GenericMapper.mapList(listActivos, FondoDTO.class);
 	}
@@ -106,7 +116,10 @@ public class FondosServicesImpl implements FondosServices {
 		}
 		List<FondoDTO> list= this.getFondos();
 		Optional<FondoDTO> oFondo=list.stream().filter(f-> f.getId().equals(movimientoDTO.getFondo()))
-				.findAny();		
+				.findAny();
+		if(oFondo.isPresent()) {
+			oFondo.get().setMonto(null);
+		}
 		return oFondo.orElse(new FondoDTO()); 
 	}
 	
