@@ -25,22 +25,23 @@ public class TransaccionDynamoDAO implements TransaccionDAO {
 	@Override
 	public List<TransaccionEntity> findAll(String id) {
 		Map<String, AttributeValue> eav = new HashMap<>();
-		eav.put(":val1", new AttributeValue().withS(id));
+		eav.put(":cliente", new AttributeValue().withS(id));
 
-		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withFilterExpression("cliente = :val1")
+		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression().withFilterExpression("cliente = :cliente")
 				.withExpressionAttributeValues(eav);
 
 		return dynoDbMapper.scan(TransaccionEntity.class, scanExpression);
 	}
 
 	@Override
-	public List<TransaccionEntity> findAllActive(String id) {
+	public List<TransaccionEntity> findAllActive(String cliente) {
 		Map<String, AttributeValue> eav = new HashMap<>();
-		eav.put(":val1", new AttributeValue().withS(id));
+		eav.put(":val1", new AttributeValue().withS(cliente));
 		eav.put(":val2", new AttributeValue().withBOOL(true));
 
 		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
-				.withFilterExpression("cliente = :val1 and activa = :val2 ").withExpressionAttributeValues(eav);
+				.withFilterExpression("cliente = :val1 and activa = :val2 ")
+				.withExpressionAttributeValues(eav);
 
 		return dynoDbMapper.scan(TransaccionEntity.class, scanExpression);
 	}
@@ -58,6 +59,27 @@ public class TransaccionDynamoDAO implements TransaccionDAO {
 	@Override
 	public TransaccionEntity findByIdLoad(String idKey, String rangeKey) {		
 		return dynoDbMapper.load(TransaccionEntity.class, idKey,rangeKey);
+	}
+
+	@Override
+	public TransaccionEntity findActiveFondo(String cliente, String fondo) {
+		Map<String, AttributeValue> eav = new HashMap<>();
+		eav.put(":val1", new AttributeValue().withS(cliente));		
+		eav.put(":val2", new AttributeValue().withBOOL(true));
+		eav.put(":val3", new AttributeValue().withS(fondo));
+
+		DynamoDBScanExpression scanExpression = new DynamoDBScanExpression()
+				.withFilterExpression("cliente = :val1 and activa = :val2 and fondo = :val3 ")
+				.withExpressionAttributeValues(eav);
+		
+		List<TransaccionEntity> list = dynoDbMapper.scan(TransaccionEntity.class, scanExpression);
+		return (!list.isEmpty() && list.size()==1) ? list.get(0) : null ;
+	}
+
+	@Override
+	public boolean saveOrUpdate(TransaccionEntity transaccion) {
+		this.dynoDbMapper.save(transaccion);
+		return true;
 	}
 
 }

@@ -33,12 +33,25 @@ public class ClienteServicesImpl implements ClienteServices {
 
 
 	@Override
-	public ClienteDTO getClienteById(String id,String email) {
+	public ClienteDTO getClienteByIdDTO(String id,String email) {
+		ClienteEntity cliente = this.getClienteById(id, email);
+		return GenericMapper.map(cliente, ClienteDTO.class);
+	}
+
+
+	@Override
+	public ClienteEntity getClienteById(String id, String email) {
 		ClienteEntity cliente = this.clienteDynamoDAO.getClienteById(id,email);
 		if(cliente==null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El cliente no Existe");
 		}
-		return GenericMapper.map(cliente, ClienteDTO.class);
+		return cliente;
+	}
+
+
+	@Override
+	public boolean saveCliente(ClienteEntity clienteEntity) {		
+		return this.clienteDynamoDAO.saveOrUpdate(clienteEntity);
 	}
 
 }

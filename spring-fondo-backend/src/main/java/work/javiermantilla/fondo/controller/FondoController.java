@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import work.javiermantilla.fondo.dto.AutenticationDTO;
+
 import work.javiermantilla.fondo.dto.GenericResponseDTO;
 import work.javiermantilla.fondo.dto.MovimientoAperturaDTO;
 import work.javiermantilla.fondo.dto.MovimientoDTO;
 import work.javiermantilla.fondo.services.FondosServices;
+import work.javiermantilla.fondo.util.ETipoTransaccion;
 import work.javiermantilla.fondo.util.FondoConstantes;
 
 @RestController
@@ -72,20 +73,20 @@ public class FondoController {
 		return new ResponseEntity<>(genericResponse, HttpStatus.OK);		
 	}
 	
-//	@PostMapping("/suscribir") 
-//	public ResponseEntity<Object> setSuscribir(@Valid @RequestBody MovimientoAperturaDTO movimientoAperturaDTO) {
-//		
-//		log.info("Suscripcion : {}", movimientoAperturaDTO);		
-//		genericResponse = new GenericResponseDTO(
-//				null/*this.fondosServices.getFondosInactivos(id)*/,
-//				true, 
-//				FondoConstantes.RESPONSE_FIND,
-//				HttpStatus.OK, 
-//				FondoConstantes.TITTLE_FIND);
-//				
-//		return new ResponseEntity<>(genericResponse, HttpStatus.OK);		
-//	}
-//	
+	@PostMapping("/apertura") 
+	public ResponseEntity<Object> setSuscribir(@Valid @RequestBody MovimientoAperturaDTO movimientoAperturaDTO) {
+		
+		log.info("Suscripcion : {}", movimientoAperturaDTO);		
+		genericResponse = new GenericResponseDTO(
+				this.fondosServices.movimientoFondo(movimientoAperturaDTO,ETipoTransaccion.APERTURA),
+				true, 
+				FondoConstantes.RESPONSE_FIND,
+				HttpStatus.OK, 
+				FondoConstantes.TITTLE_FIND);
+				
+		return new ResponseEntity<>(genericResponse, HttpStatus.OK);		
+	}
+	
 	
 	
 	@PostMapping("/cancelar") 
@@ -93,11 +94,11 @@ public class FondoController {
 		
 		log.info("Fondo a cancelar : {}", movimientoDTO);		
 		genericResponse = new GenericResponseDTO(
-				this.fondosServices.cancelarFondo(movimientoDTO),
+				this.fondosServices.movimientoFondo(movimientoDTO,ETipoTransaccion.CANCELACION),
 				true, 
-				FondoConstantes.RESPONSE_FIND,
+				FondoConstantes.RESPONSE_CANCELAR,
 				HttpStatus.OK, 
-				FondoConstantes.TITTLE_FIND);
+				FondoConstantes.TITTLE_CANCELAR);
 				
 		return new ResponseEntity<>(genericResponse, HttpStatus.OK);		
 	}

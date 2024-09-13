@@ -34,4 +34,10 @@ public class ClienteDynamoDAOImpl implements ClienteDAO {
 		return dynoDbMapper.load(ClienteEntity.class, hashKey,rangeKey);
 	}
 
+	@Override
+	public boolean saveOrUpdate(ClienteEntity clienteEntity) {
+		this.dynoDbMapper.save(clienteEntity);
+		return true;
+	}
+
 }

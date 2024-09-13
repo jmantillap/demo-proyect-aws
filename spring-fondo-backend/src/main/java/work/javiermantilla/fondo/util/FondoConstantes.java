@@ -39,4 +39,9 @@ public class FondoConstantes {
 	
 	public static final String MENSAJE_ERROR_VALIDACION_CAMPOS = "Error validación de campos";
 	
+	public static final String RESPONSE_CANCELAR = "Cancelación del fondo realizada con éxito";
+	public static final String TITTLE_CANCELAR = "Cancelación Exitosa";
+	
+	
+	
 }

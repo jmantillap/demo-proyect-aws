@@ -5,7 +5,7 @@ import java.util.Map;
 
 public enum ETipoTransaccion {
 	APERTURA("A","-","Apertura"),
-	RETIRO("c","+","Cancelación"),;
+	CANCELACION("c","+","Cancelación"),;
 	
 	private String code;
 	private String signo;
