@@ -19,6 +19,7 @@ import work.javiermantilla.fondo.entity.TransaccionEntity;
 import work.javiermantilla.fondo.security.ContextSession;
 import work.javiermantilla.fondo.security.dto.UserContextSessionDTO;
 import work.javiermantilla.fondo.services.ClienteServices;
+import work.javiermantilla.fondo.services.EmailServices;
 import work.javiermantilla.fondo.services.FondosServices;
 import work.javiermantilla.fondo.services.TransaccionServices;
 import work.javiermantilla.fondo.util.ETipoTransaccion;
@@ -33,6 +34,7 @@ public class FondosServicesImpl implements FondosServices {
 	private final TransaccionServices transaccionServices;
 	private final ClienteServices clienteServices;
 	private final ContextSession contextSession;
+	private final EmailServices emailServices;
 
 	@Override
 	public List<FondoDTO> getFondos() {
@@ -107,10 +109,11 @@ public class FondosServicesImpl implements FondosServices {
 
 	@Override
 	public FondoDTO movimientoFondo(MovimientoDTO movimientoDTO, ETipoTransaccion tipo) {
+		
 		if(ETipoTransaccion.CANCELACION.equals(tipo)) {
 			this.cancelarFondo(movimientoDTO);
 		}else if(ETipoTransaccion.APERTURA.equals(tipo)) {
-			this.aperturaFondo((MovimientoAperturaDTO)movimientoDTO);
+			this.aperturaFondo((MovimientoAperturaDTO)movimientoDTO);			
 		}else {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tipo de transaccion no definido");
 		}
@@ -120,6 +123,7 @@ public class FondosServicesImpl implements FondosServices {
 		if(oFondo.isPresent()) {
 			oFondo.get().setMonto(null);
 		}
+		
 		return oFondo.orElse(new FondoDTO()); 
 	}
 	
@@ -160,7 +164,7 @@ public class FondosServicesImpl implements FondosServices {
 		
 		this.transaccionServices.saveApertura(newTransaccion);		
 		this.clienteServices.saveCliente(cliente);
-						
+		this.emailServices.sendEmail(oFondo.get());				
 		return true;
 	}
 
