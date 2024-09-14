@@ -1,6 +1,9 @@
 AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  BucketName: { Type: String, Default: "site-angular-test-dev" }
 Resources:
   S3Bucket:
+    DeletionPolicy: Delete
     Type: 'AWS::S3::Bucket'
     Properties:
       PublicAccessBlockConfiguration:
@@ -8,7 +11,8 @@ Resources:
         BlockPublicPolicy: false
         IgnorePublicAcls: false
         RestrictPublicBuckets: false
-      BucketName: !Sub "${AWS::StackName}"  
+      #BucketName: !Sub "${AWS::StackName}"  
+      BucketName: !Ref BucketName
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
