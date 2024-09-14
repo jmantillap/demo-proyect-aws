@@ -2,6 +2,7 @@ package work.javiermantilla.fondo.services.impl;
 
 import java.util.Calendar;
 
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,6 +26,7 @@ public class LoginServicesImpl implements LoginServices {
 
 	private final JwtUtil jwtUtil;
 	private final ClienteServices clienteServices;
+	private final Environment env;
 
 	
 	@Override
@@ -39,9 +41,11 @@ public class LoginServicesImpl implements LoginServices {
 
 	@Override
 	public HttpServletResponse createCookieSession(String token, HttpServletResponse response) {
-		try {
-			//log.info("Header Access-Control-Allow-Origin: {}",response.getHeader("Access-Control-Allow-Origin"));			
+		try {						
 			String dominio = FondoConstantes.DOMAIN_LOCAL_COOKIE;
+			if(env.getProperty("ENV_DOMAIN")==null) {
+				dominio= "site-angular-test-dev.s3-website-us-east-1.amazonaws.com";
+			}			
 			Calendar date = Calendar.getInstance();
 			String expiracion = obtenerExpiracionToken(token);
 			date.setTimeInMillis(Long.parseLong(expiracion));

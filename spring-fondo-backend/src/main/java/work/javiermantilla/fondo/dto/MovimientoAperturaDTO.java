@@ -39,6 +39,13 @@ public class MovimientoAperturaDTO extends MovimientoDTO implements Serializable
 		MovimientoAperturaDTO other = (MovimientoAperturaDTO) obj;
 		return Float.floatToIntBits(monto) == Float.floatToIntBits(other.monto);
 	}
+
+	public MovimientoAperturaDTO(String fondo, @NotNull @Positive float monto) {
+		super(fondo);
+		this.monto = monto;
+	}
+	
+	
 	
 	
 }

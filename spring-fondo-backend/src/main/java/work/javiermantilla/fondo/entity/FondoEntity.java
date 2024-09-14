@@ -42,15 +42,12 @@ public class FondoEntity implements Serializable {
 	@DynamoDBAttribute(attributeName = "nombre")
 	@DynamoDBTyped(DynamoDBAttributeType.S)
 	private String nombre;
+
+	public FondoEntity(String id) {
+		super();
+		this.id = id;
+	}
 	
-//	@DynamoDBTyped(DynamoDBAttributeType.BOOL)
-//    @DynamoDBAttribute(attributeName = "Blocked")    
-//    private boolean blocked;
-//	@DynamoDBAttribute(attributeName = "NumberAttempts")
-//	private int numberAttempts;
-//    @DynamoDBAttribute(attributeName = "Password")    
-//    private String password;
-//    @DynamoDBAttribute(attributeName = "PasswordExpires")
-//    private String passwordExpires;    
+	
 
 }

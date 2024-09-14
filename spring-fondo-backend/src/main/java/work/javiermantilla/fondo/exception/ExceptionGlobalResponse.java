@@ -111,7 +111,7 @@ public class ExceptionGlobalResponse {
 				|| ex.getStatusCode().value() == 206) {
 			data = null;
 		} else {
-			log.error(ex.getMessage());
+			log.error(ex.getMessage(),ex);
 		}
 		result = new GenericResponseDTO(data, false, mensaje, HttpStatus.valueOf(ex.getStatusCode().value()));
 		return new ResponseEntity<>(result, ex.getStatusCode());

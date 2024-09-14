@@ -174,7 +174,7 @@
 						<exclude>**/dto/**</exclude>
 						<exclude>**/exception/*</exclude>
 						<exclude>**/security/*</exclude>
-						<exclude>**/utils/*</exclude>
+						<exclude>**/util/*</exclude>
 						<exclude>**/validators/*</exclude>
 						<exclude>**/config/*</exclude>
 					</excludes>

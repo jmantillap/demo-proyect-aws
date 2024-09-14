@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBScanExpression;
 
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,12 @@ public class FondoDynamoDAOImpl implements FondoDAO {
 	@Override
 	public FondoEntity findByID(String id) {
 		
-		return null;
+		DynamoDBQueryExpression<FondoEntity> fondoQuery = new DynamoDBQueryExpression<>();		
+		log.info("Se consulta fondo por id : {}", id);
+		FondoEntity FondoKey = new FondoEntity(id);
+		fondoQuery.setHashKeyValues(FondoKey);		
+		List<FondoEntity> list=this.dynoDbMapper.query(FondoEntity.class, fondoQuery);
+		return list.isEmpty() ? null : list.get(0); 
 	}
 	
 	
