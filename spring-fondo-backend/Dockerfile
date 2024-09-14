@@ -1,5 +1,6 @@
 FROM openjdk:17-jdk-slim
 
+LABEL org.opencontainers.image.authors="jmantillap@gmail.com"
 #host.docker.internal --> maquina fisica donde esta la base de data. host anfitrion
 #ENV JDBC_URL_BD=jdbc:mysql://host.docker.internal:3306/test
 #ENV USERNAME_BD=root
