@@ -14,7 +14,7 @@ Resources:
       NetworkMode: "awsvpc"
       ContainerDefinitions:
         - Name: "fondo-backend"
-          Image: "590184132147.dkr.ecr.us-east-1.amazonaws.com/jmantillap/fondo:1.0"
+          Image: "0000000000.dkr.ecr.us-east-1.amazonaws.com/jmantillap/fondo:1.0"
           MemoryReservation: 256
           Memory: 512
           PortMappings:
