@@ -7,6 +7,7 @@ Resources:
     Properties:
       RequiresCompatibilities:
         - "FARGATE"
+      TaskRoleArn: !Ref ECSTaskRol  
       ExecutionRoleArn: !Ref ECSExecutionRole
       Cpu: 256
       Memory: 512
@@ -27,6 +28,23 @@ Resources:
               awslogs-group: "/ecs/fondo-task"
               awslogs-region: "us-east-1"
               awslogs-stream-prefix: ecs         
+  # Rol de la tarea             
+  ECSTaskRol:
+    DeletionPolicy: Delete
+    Type: "AWS::IAM::Role"    
+    Properties: 
+      RoleName: "fondo-ecs-task-rol"
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - Effect: "Allow"
+            Principal: 
+              Service: 
+                - "ecs-tasks.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+  # Rol de ejecucion del fargate    
   ECSExecutionRole:
     DeletionPolicy: Delete
     Type: AWS::IAM::Role
@@ -41,10 +59,35 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
         - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy      
-  # Creacion politica dynamo    
+  # Creacion politica  para la el rol ejecucion del fargate
+  RoleExecutionFargate: 
+    DeletionPolicy: Delete
+    Type: "AWS::IAM::Policy"
+    Properties:         
+      PolicyName: "ECSFargatePolicy"
+      PolicyDocument: 
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - 'ssm:GetParameters'
+              - 'ssm:DescribeParameters'
+              - 'ssm:GetParameter'
+              - 'ssm:GetParametersByPath'
+              - 'ssm:PutParameter'
+              - 'ssm:GetParameterHistory'
+              - 'ssm:DescribeParameter'
+              - 'logs:*'
+              - 'cloudwatch:GenerateQuery'
+              - 'logs:CreateLogStream'
+              - 'logs:PutLogEvents'
+            Resource: '*'
+      Roles: 
+        - Ref: "ECSExecutionRole"      
+  # Creacion politica para la el rol de la tarea    
   FargateTaskPolicy:
     DeletionPolicy: Delete
-    Type: AWS::IAM::Policy
+    Type: AWS::IAM::Policy    
     Properties:
         PolicyName: 'ECSTaskPolicy'
         PolicyDocument: 
@@ -54,13 +97,13 @@ Resources:
                   Action:                       
                       - 'dynamodb:UpdateItem'
                       - 'dynamodb:PutItem'
-                      - 'dynamodb:ListTables'
-                      - 'dynamodb:ListGlobalTables'
+                      - 'dynamodb:List*'                      
                       - 'dynamodb:GetItem'                      
                       - 'dynamodb:Query'
                       - 'dynamodb:Scan'
                       - 'dynamodb:Batch*'
                       - 'dynamodb:Describe*'
+                      - 'dynamodb:Scan*'
                       - 'logs:*'
                       - 'cloudwatch:GenerateQuery'
                       - 'logs:CreateLogStream'
@@ -70,7 +113,7 @@ Resources:
                       - 'ses:SendRawEmail'                      
                   Resource: '*'
         Roles: 
-            - !Ref 'ECSExecutionRole'  
+            - Ref: "ECSTaskRol"
   # Creacion cluster
   ECSCluster:
       DeletionPolicy: Delete
