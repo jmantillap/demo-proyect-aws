@@ -24,11 +24,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/security/login",
+							"raw": "{{alb}}/api/security/login",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"security",
@@ -282,6 +281,25 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{alb}}/api/status/health",
+					"host": [
+						"{{alb}}"
+					],
+					"path": [
+						"api",
+						"status",
+						"health"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -310,6 +328,16 @@
 		{
 			"key": "cookie",
 			"value": "fondo_token=eyJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOiIxMzU0NDE3MSIsIm5hbWUiOiJKYXZpZXIgTWFudGlsbGEiLCJlbWFpbCI6ImptYW50aWxsYXBAZ21haWwuY29tIiwiaXNzIjoiMTM1NDQxNzEiLCJzdWIiOiJKYXZpZXIgTWFudGlsbGEiLCJpYXQiOjE3MjYyMzg1MTMsImV4cCI6MTcyNjI4MTcxM30.B3eYhpfjxoi3sZwF9M5zv777QsqxDyoAIhZ83wbb7uo",
+			"type": "string"
+		},
+		{
+			"key": "localhost",
+			"value": "localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "alb",
+			"value": "http://fargatealb-1418717263.us-east-1.elb.amazonaws.com",
 			"type": "string"
 		}
 	]
