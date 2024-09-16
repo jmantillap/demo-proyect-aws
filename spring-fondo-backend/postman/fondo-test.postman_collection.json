@@ -54,11 +54,10 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/cliente/13544171",
+							"raw": "{{alb}}/api/cliente/13544171",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"cliente",
@@ -101,7 +100,7 @@
 			"name": "fondos",
 			"item": [
 				{
-					"name": "getAll",
+					"name": "fondo - getAll",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -112,11 +111,10 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/fondo",
+							"raw": "{{alb}}/api/fondo",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"fondo"
@@ -126,7 +124,7 @@
 					"response": []
 				},
 				{
-					"name": "inscritos",
+					"name": "fondos inscritos",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -137,11 +135,10 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/fondo/13544171/inscritos",
+							"raw": "{{alb}}/api/fondo/13544171/inscritos",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"fondo",
@@ -192,7 +189,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fondo\":\"1\"\r\n}",
+							"raw": "{\r\n    \"fondo\":\"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -200,11 +197,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/fondo/cancelar",
+							"raw": "{{alb}}/api/fondo/cancelar",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"fondo",
@@ -227,7 +223,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"fondo\":\"3\",\r\n    \"monto\":100000\r\n}",
+							"raw": "{\r\n    \"fondo\":\"3\",\r\n    \"monto\":150000\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -235,11 +231,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/fondo/apertura",
+							"raw": "{{alb}}/api/fondo/apertura",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"fondo",
@@ -266,11 +261,10 @@
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/api/transaccion/13544171",
+							"raw": "{{alb}}/api/transaccion/13544171",
 							"host": [
-								"localhost"
+								"{{alb}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"transaccion",
@@ -327,7 +321,7 @@
 	"variable": [
 		{
 			"key": "cookie",
-			"value": "fondo_token=eyJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOiIxMzU0NDE3MSIsIm5hbWUiOiJKYXZpZXIgTWFudGlsbGEiLCJlbWFpbCI6ImptYW50aWxsYXBAZ21haWwuY29tIiwiaXNzIjoiMTM1NDQxNzEiLCJzdWIiOiJKYXZpZXIgTWFudGlsbGEiLCJpYXQiOjE3MjYyMzg1MTMsImV4cCI6MTcyNjI4MTcxM30.B3eYhpfjxoi3sZwF9M5zv777QsqxDyoAIhZ83wbb7uo",
+			"value": "fondo_token=eyJhbGciOiJIUzI1NiJ9.eyJpZFVzZXIiOiIxMzU0NDE3MSIsIm5hbWUiOiJKYXZpZXIgTWFudGlsbGEiLCJlbWFpbCI6ImptYW50aWxsYXBAZ21haWwuY29tIiwiaXNzIjoiMTM1NDQxNzEiLCJzdWIiOiJKYXZpZXIgTWFudGlsbGEiLCJpYXQiOjE3MjY0OTE5NTgsImV4cCI6MTcyNjUzNTE1OH0.ERKD4KQGMFt-KEWGZIngZJWNr0i5OUy7bJDHbN-k-Mk",
 			"type": "string"
 		},
 		{
