@@ -1,34 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: "CloudFormation template for creating a task definition"
 Resources:
-  MyTaskDefinition:
-    DeletionPolicy: Delete
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      RequiresCompatibilities:
-        - "FARGATE"
-      TaskRoleArn: !Ref ECSTaskRol  
-      ExecutionRoleArn: !Ref ECSExecutionRole
-      Cpu: 256
-      Memory: 512
-      NetworkMode: "awsvpc"
-      ContainerDefinitions:
-        - Name: "fondo-backend"
-          Image: "0000000000.dkr.ecr.us-east-1.amazonaws.com/jmantillap/fondo:1.0"
-          MemoryReservation: 256
-          Memory: 512
-          PortMappings:
-            - ContainerPort: 8080
-              HostPort: 8080
-              Protocol: tcp 
-          LogConfiguration:
-            LogDriver: awslogs
-            Options:
-              awslogs-create-group: 'true'
-              awslogs-group: "/ecs/fondo-task"
-              awslogs-region: "us-east-1"
-              awslogs-stream-prefix: ecs         
-  # Rol de la tarea             
+# Rol de la tarea             
   ECSTaskRol:
     DeletionPolicy: Delete
     Type: "AWS::IAM::Role"    
@@ -58,7 +31,35 @@ Resources:
             Action: 'sts:AssumeRole'
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
-        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy      
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+  MyTaskDefinition:
+    DeletionPolicy: Delete
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      RequiresCompatibilities:
+        - "FARGATE"
+      TaskRoleArn: !Ref ECSTaskRol  
+      ExecutionRoleArn: !Ref ECSExecutionRole
+      Cpu: 256
+      Memory: 512
+      NetworkMode: "awsvpc"
+      ContainerDefinitions:
+        - Name: "fondo-backend"
+          Image: "0000000000.dkr.ecr.us-east-1.amazonaws.com/jmantillap/fondo:1.0"
+          MemoryReservation: 256
+          Memory: 512
+          PortMappings:
+            - ContainerPort: 8080
+              HostPort: 8080
+              Protocol: tcp 
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-create-group: 'true'
+              awslogs-group: "/ecs/fondo-task"
+              awslogs-region: "us-east-1"
+              awslogs-stream-prefix: ecs         
+        
   # Creacion politica  para la el rol ejecucion del fargate
   RoleExecutionFargate: 
     DeletionPolicy: Delete
@@ -111,15 +112,28 @@ Resources:
                       - 'logs:PutLogEvents'
                       - 'ses:SendEmail'
                       - 'ses:SendRawEmail'                      
+                      - 'ses:*'
                   Resource: '*'
         Roles: 
-            - Ref: "ECSTaskRol"
-  # Creacion cluster
-  ECSCluster:
-      DeletionPolicy: Delete
-      Type: 'AWS::ECS::Cluster'
-      Properties:
-        ClusterName: MyFargateCluster
+            - Ref: "ECSTaskRol"  
+  # Creacion del security group para el fargate
+  FargateAlbSG:
+    DeletionPolicy: Delete  
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupDescription: SG for the Fargate ALB
+      GroupName: FargateAlbSG
+      SecurityGroupIngress:
+        - CidrIpv6: ::/0
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: TCP
+          Description: 'Inbound rule for IPv6 traffic'
+        - CidrIp: 0.0.0.0/0
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: TCP
+          Description: 'Inbound rule for IPv4 traffic'      
   # Creacion balanceador de carga para el fargate      
   FargateAlb:
     DeletionPolicy: Delete
@@ -155,24 +169,6 @@ Resources:
       LoadBalancerArn: !Ref FargateAlb
       Port: 80
       Protocol: HTTP      
-  # Creacion del security group para el fargate
-  FargateAlbSG:
-    DeletionPolicy: Delete  
-    Type: 'AWS::EC2::SecurityGroup'
-    Properties:
-      GroupDescription: SG for the Fargate ALB
-      GroupName: FargateAlbSG
-      SecurityGroupIngress:
-        - CidrIpv6: ::/0
-          FromPort: 80
-          ToPort: 80
-          IpProtocol: TCP
-          Description: 'Inbound rule for IPv6 traffic'
-        - CidrIp: 0.0.0.0/0
-          FromPort: 80
-          ToPort: 80
-          IpProtocol: TCP
-          Description: 'Inbound rule for IPv4 traffic'    
   # Creacion del security group para LOS CONTENEDORES
   Alb2FargateContainers:
     DeletionPolicy: Delete
@@ -184,6 +180,12 @@ Resources:
         - IpProtocol: -1
           SourceSecurityGroupId: !GetAtt FargateAlbSG.GroupId
           Description: 'Inbound rule for all traffic'  
+  # Creacion cluster
+  ECSCluster:
+      DeletionPolicy: Delete
+      Type: 'AWS::ECS::Cluster'
+      Properties:
+        ClusterName: MyFargateCluster        
   # Creacion del servicio
   MyECSService:
     DeletionPolicy: Delete
