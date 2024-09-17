@@ -21,10 +21,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import jakarta.servlet.http.HttpServletResponse;
+import work.javiermantilla.fondo.basic.utils.JSONUtil;
 import work.javiermantilla.fondo.config.TestSecurityConfig;
-import work.javiermantilla.fondo.dto.AutenticationDTO;
-import work.javiermantilla.fondo.services.LoginServices;
-import work.javiermantilla.fondo.util.JSONUtil;
+import work.javiermantilla.fondo.modules.login.controller.LoginController;
+import work.javiermantilla.fondo.modules.login.dto.AutenticationDTO;
+import work.javiermantilla.fondo.modules.login.services.LoginServices;
 
 
 @WebMvcTest

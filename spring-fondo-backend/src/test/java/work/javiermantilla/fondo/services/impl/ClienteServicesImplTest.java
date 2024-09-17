@@ -14,9 +14,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.server.ResponseStatusException;
 
-import work.javiermantilla.fondo.dao.ClienteDAO;
-import work.javiermantilla.fondo.entity.ClienteEntity;
-import work.javiermantilla.fondo.services.ClienteServices;
+import work.javiermantilla.fondo.modules.client.dao.ClienteDAO;
+import work.javiermantilla.fondo.modules.client.entity.ClienteEntity;
+import work.javiermantilla.fondo.modules.client.services.ClienteServices;
+import work.javiermantilla.fondo.modules.client.services.impl.ClienteServicesImpl;
 
 
 

@@ -15,12 +15,11 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
 import software.amazon.awssdk.services.ses.SesClient;
-
-import work.javiermantilla.fondo.dto.FondoDTO;
-import work.javiermantilla.fondo.security.ContextSession;
-import work.javiermantilla.fondo.security.dto.UserContextSessionDTO;
-
-import work.javiermantilla.fondo.services.EmailServices;
+import work.javiermantilla.fondo.basic.dto.UserContextSessionDTO;
+import work.javiermantilla.fondo.basic.security.ContextSession;
+import work.javiermantilla.fondo.modules.email.services.EmailServices;
+import work.javiermantilla.fondo.modules.email.services.impl.EmailServicesImpl;
+import work.javiermantilla.fondo.modules.fund.dto.FondoDTO;
 
 
 

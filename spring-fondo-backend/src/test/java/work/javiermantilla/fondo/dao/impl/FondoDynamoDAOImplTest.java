@@ -25,10 +25,10 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 
 import lombok.extern.log4j.Log4j2;
-
-import work.javiermantilla.fondo.dao.FondoDAO;
-import work.javiermantilla.fondo.entity.ClienteEntity;
-import work.javiermantilla.fondo.entity.FondoEntity;
+import work.javiermantilla.fondo.modules.client.entity.ClienteEntity;
+import work.javiermantilla.fondo.modules.fund.dao.FondoDAO;
+import work.javiermantilla.fondo.modules.fund.dao.impl.FondoDynamoDAOImpl;
+import work.javiermantilla.fondo.modules.fund.entity.FondoEntity;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)

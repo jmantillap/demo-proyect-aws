@@ -25,8 +25,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 
 import lombok.extern.log4j.Log4j2;
-import work.javiermantilla.fondo.dao.ClienteDAO;
-import work.javiermantilla.fondo.entity.ClienteEntity;
+import work.javiermantilla.fondo.modules.client.dao.ClienteDAO;
+import work.javiermantilla.fondo.modules.client.dao.impl.ClienteDynamoDAOImpl;
+import work.javiermantilla.fondo.modules.client.entity.ClienteEntity;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)

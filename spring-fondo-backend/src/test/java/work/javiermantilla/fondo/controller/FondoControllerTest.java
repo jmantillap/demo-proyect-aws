@@ -18,11 +18,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.log4j.Log4j2;
+import work.javiermantilla.fondo.basic.utils.JSONUtil;
 import work.javiermantilla.fondo.config.TestSecurityConfig;
-import work.javiermantilla.fondo.dto.MovimientoAperturaDTO;
-import work.javiermantilla.fondo.dto.MovimientoDTO;
-import work.javiermantilla.fondo.services.FondosServices;
-import work.javiermantilla.fondo.util.JSONUtil;
+import work.javiermantilla.fondo.modules.fund.controller.FondoController;
+import work.javiermantilla.fondo.modules.fund.services.FondosServices;
+import work.javiermantilla.fondo.modules.transaction.dto.MovimientoAperturaDTO;
+import work.javiermantilla.fondo.modules.transaction.dto.MovimientoDTO;
 
 @WebMvcTest
 @ContextConfiguration(classes = { FondoController.class, TestSecurityConfig.class })

@@ -19,7 +19,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.log4j.Log4j2;
 import work.javiermantilla.fondo.config.TestSecurityConfig;
-import work.javiermantilla.fondo.services.TransaccionServices;
+import work.javiermantilla.fondo.modules.transaction.controller.TransaccionController;
+import work.javiermantilla.fondo.modules.transaction.services.TransaccionServices;
 
 @WebMvcTest
 @ContextConfiguration(classes = { TransaccionController.class, TestSecurityConfig.class })

@@ -27,10 +27,9 @@ import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedQueryList;
 import com.amazonaws.services.dynamodbv2.datamodeling.PaginatedScanList;
 
 import lombok.extern.log4j.Log4j2;
-
-import work.javiermantilla.fondo.dao.TransaccionDAO;
-
-import work.javiermantilla.fondo.entity.TransaccionEntity;
+import work.javiermantilla.fondo.modules.transaction.dao.TransaccionDAO;
+import work.javiermantilla.fondo.modules.transaction.dao.impl.TransaccionDynamoDAO;
+import work.javiermantilla.fondo.modules.transaction.entity.TransaccionEntity;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)

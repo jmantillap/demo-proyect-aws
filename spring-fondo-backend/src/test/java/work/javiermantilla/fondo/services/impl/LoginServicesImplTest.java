@@ -16,10 +16,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.servlet.http.HttpServletResponse;
-import work.javiermantilla.fondo.dto.ClienteDTO;
-import work.javiermantilla.fondo.security.JwtUtil;
-import work.javiermantilla.fondo.services.ClienteServices;
-import work.javiermantilla.fondo.services.LoginServices;
+import work.javiermantilla.fondo.basic.security.JwtUtil;
+import work.javiermantilla.fondo.modules.client.dto.ClienteDTO;
+import work.javiermantilla.fondo.modules.client.services.ClienteServices;
+import work.javiermantilla.fondo.modules.login.services.LoginServices;
+import work.javiermantilla.fondo.modules.login.services.impl.LoginServicesImpl;
 
 
 @SpringBootTest

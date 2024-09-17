@@ -119,11 +119,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>-->
+		
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
@@ -177,6 +173,7 @@
 						<exclude>**/util/*</exclude>
 						<exclude>**/validators/*</exclude>
 						<exclude>**/config/*</exclude>
+						<exclude>**/basic/**</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

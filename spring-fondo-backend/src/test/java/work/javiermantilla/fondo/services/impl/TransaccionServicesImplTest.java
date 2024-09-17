@@ -11,11 +11,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
-
-import work.javiermantilla.fondo.dao.TransaccionDAO;
-import work.javiermantilla.fondo.entity.TransaccionEntity;
-
-import work.javiermantilla.fondo.services.TransaccionServices;
+import work.javiermantilla.fondo.modules.transaction.dao.TransaccionDAO;
+import work.javiermantilla.fondo.modules.transaction.entity.TransaccionEntity;
+import work.javiermantilla.fondo.modules.transaction.services.TransaccionServices;
+import work.javiermantilla.fondo.modules.transaction.services.impl.TransaccionServicesImpl;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)

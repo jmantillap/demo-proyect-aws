@@ -5,7 +5,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import work.javiermantilla.fondo.security.JwtAuthenticationFilter;
+import work.javiermantilla.fondo.basic.security.JwtAuthenticationFilter;
 
 import java.io.IOException;
 

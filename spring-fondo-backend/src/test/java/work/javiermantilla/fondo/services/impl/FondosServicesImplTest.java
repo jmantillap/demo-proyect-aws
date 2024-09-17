@@ -17,19 +17,20 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.server.ResponseStatusException;
 
-import work.javiermantilla.fondo.dao.FondoDAO;
-import work.javiermantilla.fondo.dto.MovimientoAperturaDTO;
-import work.javiermantilla.fondo.dto.MovimientoDTO;
-import work.javiermantilla.fondo.entity.ClienteEntity;
-import work.javiermantilla.fondo.entity.FondoEntity;
-import work.javiermantilla.fondo.entity.TransaccionEntity;
-import work.javiermantilla.fondo.security.ContextSession;
-import work.javiermantilla.fondo.security.dto.UserContextSessionDTO;
-import work.javiermantilla.fondo.services.ClienteServices;
-import work.javiermantilla.fondo.services.EmailServices;
-import work.javiermantilla.fondo.services.FondosServices;
-import work.javiermantilla.fondo.services.TransaccionServices;
-import work.javiermantilla.fondo.util.ETipoTransaccion;
+import work.javiermantilla.fondo.basic.dto.UserContextSessionDTO;
+import work.javiermantilla.fondo.basic.security.ContextSession;
+import work.javiermantilla.fondo.basic.utils.ETipoTransaccion;
+import work.javiermantilla.fondo.modules.client.entity.ClienteEntity;
+import work.javiermantilla.fondo.modules.client.services.ClienteServices;
+import work.javiermantilla.fondo.modules.email.services.EmailServices;
+import work.javiermantilla.fondo.modules.fund.dao.FondoDAO;
+import work.javiermantilla.fondo.modules.fund.entity.FondoEntity;
+import work.javiermantilla.fondo.modules.fund.services.FondosServices;
+import work.javiermantilla.fondo.modules.fund.services.impl.FondosServicesImpl;
+import work.javiermantilla.fondo.modules.transaction.dto.MovimientoAperturaDTO;
+import work.javiermantilla.fondo.modules.transaction.dto.MovimientoDTO;
+import work.javiermantilla.fondo.modules.transaction.entity.TransaccionEntity;
+import work.javiermantilla.fondo.modules.transaction.services.TransaccionServices;
 
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)

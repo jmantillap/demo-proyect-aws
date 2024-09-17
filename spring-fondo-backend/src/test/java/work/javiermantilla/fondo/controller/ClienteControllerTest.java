@@ -19,7 +19,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import lombok.extern.log4j.Log4j2;
 import work.javiermantilla.fondo.config.TestSecurityConfig;
-import work.javiermantilla.fondo.services.ClienteServices;
+import work.javiermantilla.fondo.modules.client.controller.ClienteController;
+import work.javiermantilla.fondo.modules.client.services.ClienteServices;
 
 
 @WebMvcTest
